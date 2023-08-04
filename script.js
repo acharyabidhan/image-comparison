@@ -35,7 +35,7 @@ window.onload = () => {
 
     let prev_pos_x;
 
-    let prev_btn_pos = get_absolute(main_container_width / 2);
+    let prev_btn_pos = main_container_width / 2;
 
     function start_dragging(e) {
         prev_pos_x = is_touch_device ? e.touches[0].clientX : e.clientX;
@@ -49,13 +49,9 @@ window.onload = () => {
         prev_btn_pos = pos;
     }
 
-    function get_absolute(value) {
-        return Math.abs(value);
-    }
-
     function drag_element(e) {
-        const left_limit = get_absolute(slider_button.offsetWidth / 2);
-        const right_limit = main_container_width - get_absolute(slider_button.offsetWidth / 2);
+        const left_limit = slider_button.offsetWidth / 2;
+        const right_limit = main_container_width - slider_button.offsetWidth / 2;
         const new_pos_x = is_touch_device ? e.touches[0].clientX : e.clientX;
         const mouse_steps = new_pos_x - prev_pos_x;
         new_btn_pos = prev_btn_pos + mouse_steps;
@@ -69,11 +65,11 @@ window.onload = () => {
         prev_pos_x = new_pos_x;
         prev_btn_pos = new_btn_pos;
         const value_in_percentage = (parseInt(slider_button.style.left, 10) * 100) / main_container_width;
-        slide_image(get_absolute(value_in_percentage));
+        slide_image(value_in_percentage);
     }
 
     function stop_dragging(e) {
-        const left_limit = get_absolute(slider_button.offsetWidth / 2)
+        const left_limit = slider_button.offsetWidth / 2;
         const right_limit = main_container_width - left_limit;
         if (prev_btn_pos > right_limit) {
             prev_btn_pos = right_limit;
